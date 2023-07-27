@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{admin/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <!-- Include Highcharts library -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+    <section class="center">
+
+        <h1>Admin Dashboard</h1>
+
+        <div th:if="${session.msg}">
+            <h3 th:text="${session.msg}" style="color:red"></h3>
+            <h3 th:text="${session.msg}" style="color:red"></h3>
+        </div>
+
+        <h3>Candidate 1 : Total Votes = <b style="color: limegreen"><span th:text="${c1}"></span></b></h3>
+        <h3>Candidate 2 : Total Votes = <b style="color: limegreen"><span th:text="${c2}"></span></b></h3>
+        <h3>Candidate 3 : Total Votes = <b style="color: limegreen"><span th:text="${c3}"></span></b></h3>
+        <h3>Candidate 4 : Total Votes = <b style="color: limegreen"><span th:text="${c4}"></span></b></h3>
+
+        <!-- Add a container div for the bar chart -->
+        <div id="voteChart" style="height: 400px;"></div>
+    </section>
+
+    <!-- Script block for generating the bar chart -->
+    <script th:inline="javascript">
+        // Get the data from Thymeleaf model attributes
+        const c1Votes = 20;
+        const c2Votes = 30;
+        const c3Votes = 50;
+        const c4Votes = 60;
+
+        // Create the chart using Highcharts
+        Highcharts.chart('voteChart', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Total Votes for Each Candidate'
+            },
+            xAxis: {
+                categories: ['Candidate 1', 'Candidate 2', 'Candidate 3', 'Candidate 4']
+            },
+            yAxis: {
+                title: {
+                    text: 'Total Votes'
+                }
+            },
+            series: [{
+                name: 'Votes',
+                data: [c1Votes, c2Votes, c3Votes, c4Votes],
+                color: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        });
+    </script>
+</body>
+</html>

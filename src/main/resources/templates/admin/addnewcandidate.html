@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Constituency</title>
+    
+</head>
+<body>
+    <h2>Add New Constituency</h2>
+     
+    <form th:action="@{/admin/addnewconstituency}" method="post">
+        
+        
+        
+        <label for="constituencyName">Constituency Name:</label>
+        <input type="text" id="constituencyName" name="name" required>
+        <button type="submit">Add Constituency</button>
+    </form>
+</body>
+</html>
+
+
