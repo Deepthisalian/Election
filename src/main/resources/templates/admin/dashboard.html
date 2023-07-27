@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>Document</title>
-    <!-- Include Highcharts library -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- Load Google Charts library -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
     <section class="center">
@@ -26,37 +26,43 @@
     </section>
 
     <!-- Script block for generating the bar chart -->
-    <script th:inline="javascript">
-        // Get the data from Thymeleaf model attributes
-        const c1Votes = 20;
-        const c2Votes = 30;
-        const c3Votes = 50;
-        const c4Votes = 60;
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
 
-        // Create the chart using Highcharts
-        Highcharts.chart('voteChart', {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Total Votes for Each Candidate'
-            },
-            xAxis: {
-                categories: ['Candidate 1', 'Candidate 2', 'Candidate 3', 'Candidate 4']
-            },
-            yAxis: {
-                title: {
-                    text: 'Total Votes'
-                }
-            },
-            series: [{
-                name: 'Votes',
-                data: [c1Votes, c2Votes, c3Votes, c4Votes],
-                color: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        });
+        function drawChart() {
+            // Get the data for the chart from Thymeleaf variables
+            var c1Votes = 10;
+            var c2Votes = 20;
+            var c3Votes =40;
+            var c4Votes = 30;
+            
+            
+            
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Candidate');
+            data.addColumn('number', 'Total Votes');
+            data.addRows([
+                ['Candidate 1', c1Votes],
+                ['Candidate 2', c2Votes],
+                ['Candidate 3', c3Votes],
+                ['Candidate 4', c4Votes]
+            ]);
+
+            // Set chart options
+            var options = {
+                title: 'Candidate Votes',
+                vAxis: {title: 'Total Votes'},
+                hAxis: {title: 'Candidate'},
+                legend: 'none'
+            };
+
+            // Instantiate and draw the chart
+            var chart = new google.visualization.ColumnChart(document.getElementById('voteChart'));
+            chart.draw(data, options);
+        }
     </script>
 </body>
 </html>

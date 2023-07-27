@@ -141,6 +141,38 @@ public class AdminController {
 				
 				return "redirect:/admin/viewusers";
 			}
+			
+			@GetMapping("/displayresults")
+		    public String displayResults(Model m) {
+				
+				int c1=0;
+				int c2=0;
+				int c3=0;
+				int c4=0;
+				
+				List<Candidate> listc = cndServ.getAllCandidates();
+				for (Candidate v : listc) {
+					if (!v.getCandidate1().equals(""))
+						c1++;
+					if (!v.getCandidate2().equals(""))
+						c2++;
+					if (!v.getCandidate3().equals(""))
+						c3++;
+					if (!v.getCandidate4().equals(""))
+						c4++;
+				}
+
+
+				
+				
+				m.addAttribute("c1",c1);
+				m.addAttribute("c2",c2);
+				m.addAttribute("c3",c3);
+				m.addAttribute("c4",c4);
+		        
+		        return "admin/displayresults"; // Return the name of the Thymeleaf template to display the results
+		    }
+			
 				
 			// delete user
 			@GetMapping("/deleteuser/{id}")
