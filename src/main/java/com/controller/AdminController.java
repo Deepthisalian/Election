@@ -20,7 +20,7 @@ import com.model.NewConstituency;
 import com.model.User;
 import com.service.AdminService;
 import com.service.CandidateService;
-
+import com.service.NewCandidateService;
 import com.service.NewConstituencyService;
 import com.service.RoleService;
 import com.service.UserService;
@@ -44,6 +44,16 @@ public class AdminController {
 	
 	@Autowired
 	private NewConstituencyService constituencyService;
+	
+	@Autowired
+	private NewCandidateService newcandidateService;
+	
+
+	    @Autowired
+	    public AdminController(NewCandidateService newcandidateService, NewConstituencyService constituencyService) {
+	        this.newcandidateService = newcandidateService;
+	        this.constituencyService = constituencyService;
+	    }
 
 
 		
@@ -173,6 +183,7 @@ public class AdminController {
 		        return "admin/displayresults"; // Return the name of the Thymeleaf template to display the results
 		    }
 			
+			 
 				
 			// delete user
 			@GetMapping("/deleteuser/{id}")

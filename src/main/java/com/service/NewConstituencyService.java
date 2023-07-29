@@ -35,6 +35,10 @@ public class NewConstituencyService {
 
         constituencyRepository.save(constituency);
     }
+    
+    public NewConstituency getConstituencyByName(String constituencyName) {
+        return constituencyRepository.findByName(constituencyName);
+    }
 
     // Add other methods as needed for constituency management
 }

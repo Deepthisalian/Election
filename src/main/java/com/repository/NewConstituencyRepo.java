@@ -7,5 +7,9 @@ import com.model.NewConstituency;
 
 @Repository
 public interface NewConstituencyRepo extends JpaRepository<NewConstituency, Integer> {
+
+	NewConstituency findByName(String constituencyName);
+
+	
     // You can add custom query methods here if needed
 }

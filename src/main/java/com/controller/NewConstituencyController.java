@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model.Candidate;
+import com.model.NewCandidate;
 import com.model.NewConstituency;
+import com.service.NewCandidateService;
 import com.service.NewConstituencyService;
 
 @Controller
 @RequestMapping("/admin")
 public class NewConstituencyController {
 
-    private final NewConstituencyService constituencyService;
+    private NewConstituencyService constituencyService;
+    
+    private NewCandidateService newcandidateService;
 
     @Autowired
     public NewConstituencyController(NewConstituencyService constituencyService) {
@@ -47,22 +51,59 @@ public class NewConstituencyController {
     
    
     
+    
+
+    // Handler method to process the form submission and add the new candidate to a constituency
+//    @PostMapping("/addnewcandidate")
+//    public String addCandidate(@ModelAttribute Candidate candidate, @RequestParam Integer constituencyId) {
+//    	if (constituencyId != null) {
+//            constituencyService.addCandidateToConstituency(candidate, constituencyId);
+//        }
+//    	
+//        return "redirect:/admin/" + constituencyId;
+//    }
     @GetMapping("/addnewcandidate")
-    public String showAddCandidateForm(Model model) {
-        model.addAttribute("candidate", new Candidate());
-        model.addAttribute("constituencies", constituencyService.getAllConstituencies());
+    public String addnewConstituency(Model model) {
+    	
+    	List<NewConstituency> allConstituencies = constituencyService.getAllConstituencies();
+    	model.addAttribute("allConstituencies", allConstituencies);
+        model.addAttribute("newConstituency", new NewConstituency());
         return "admin/addnewcandidate";
     }
 
-    // Handler method to process the form submission and add the new candidate to a constituency
+    
+    
     @PostMapping("/addnewcandidate")
-    public String addCandidate(@ModelAttribute Candidate candidate, @RequestParam Integer constituencyId) {
-    	if (constituencyId != null) {
-            constituencyService.addCandidateToConstituency(candidate, constituencyId);
+    public String addCandidateToConstituency(@RequestParam String newConstituency,
+                                             @RequestParam String candidateName) {
+
+        // Find the existing constituency by its ID
+        NewConstituency constituency = constituencyService.getConstituencyByName(newConstituency);
+
+        if (constituency != null) {
+            // Create a new candidate object and set its name
+            NewCandidate newCandidate = new NewCandidate(candidateName);
+
+            // Set the constituency for the candidate
+            newCandidate.setConstituency(constituency);
+
+            // Save the candidate to the database
+            newcandidateService.saveCandidate(newCandidate);
+
+            // Redirect to the admin dashboard or another page after successful submission
+            return "redirect:/admin/";
+        } else {
+            // Handle the case where the specified constituency doesn't exist
+            // You can add appropriate error handling here or redirect to an error page
+            return "redirect:/admin/addnewconstituency";} // Redirect back to the form page
         }
-    	
-        return "redirect:/admin/" + constituencyId;
+        public String addnewConstituency(@ModelAttribute NewConstituency newConstituency) {
+            constituencyService.addConstituency(newConstituency);
+            return "user/dashboard"; // Redirect to the admin dashboard or another page
+        
     }
+	
+
 
     // Handler method to view all constituencies (optional)
 

@@ -2,38 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add New Candidate</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <title>Add New Constituency</title>
+    
 </head>
 <body>
-    <h2>Add New Candidate</h2>
-    
-    
-    
+    <h2>Add New Constituency</h2>
+     
     <form th:action="@{/admin/addnewconstituency}" method="post">
         
         
         
-        <label for="existingConstituency">Select Existing Constituency:</label>
-        <select id="existingConstituency" name="existingConstituency" required>
-            <!-- Iterate over the list of existing constituencies and create options for each one -->
-            <option th:each="constituency : ${allConstituencies}" th:value="${constituency.id}" th:text="${constituency.name}"></option>
-        </select>
-        
-        <br>
-        <label for="candidate1">Candidate 1:</label>
-        <input type="text" id="candidate1" name="candidate1" required>
-        <br>
-        <label for="candidate2">Candidate 2:</label>
-        <input type="text" id="candidate2" name="candidate2" required>
-        <br>
-        <label for="candidate3">Candidate 3:</label>
-        <input type="text" id="candidate3" name="candidate3" required>
-        <br>
-        <label for="candidate4">Candidate 4:</label>
-        <input type="text" id="candidate4" name="candidate4" required>
-        <br>
-        <label for="constituency">Select Constituency:</label>
-        <button type="submit">Add Candidates</button>
+        <label for="constituencyName">Constituency Name:</label>
+        <input type="text" id="constituencyName" name="name" required>
+        <button type="submit">Add Constituency</button>
     </form>
 </body>
 </html>
