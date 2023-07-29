@@ -45,6 +45,8 @@ public class NewConstituencyController {
         return "redirect:/admin/"; // Redirect to the admin dashboard or another page
     }
     
+   
+    
     @GetMapping("/addnewcandidate")
     public String showAddCandidateForm(Model model) {
         model.addAttribute("candidate", new Candidate());

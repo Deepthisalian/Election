@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.model.NewConstituency;
 import com.model.Role;
 import com.model.User;
+import com.service.NewConstituencyService;
 import com.service.RoleService;
 import com.service.UserService;
 
@@ -30,6 +32,9 @@ public class HomeController {
 	
 	@Autowired
 	private RoleService roleserv;
+	
+	@Autowired
+	private  NewConstituencyService constituencyService;
 
 	@GetMapping("/")
 	public String index(Model m)
@@ -50,11 +55,15 @@ public class HomeController {
 	
 	
 	
-	
 	@GetMapping("/register")
 	public String register(Model m)
 	{
+		
+		
 		m.addAttribute("title","Registration");
+		List<NewConstituency> allConstituencies = constituencyService.getAllConstituencies();
+    	m.addAttribute("allConstituencies", allConstituencies);
+        m.addAttribute("newConstituency", new NewConstituency());
 		return "register";
 	}
 	

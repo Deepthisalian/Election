@@ -21,7 +21,13 @@
         Password: <input type="password" name="password" placeholder="Enter Your Password" required><br><br>
         Email Id: <input type="text" name="email" placeholder="Enter Your Email Id" required><br><br>
         Phone No: <input type="number" name="phone" placeholder="Enter Your Phone No" required><br><br>
-        Constituency: <input type="text" name="constituency" placeholder="Enter Constituency" required><br><br>
+        
+        
+       Constituency:
+        <select name="constituency" required>
+           
+            <option th:each="constituency : ${allConstituencies}" th:value="${constituency.id}" th:text="${constituency.name}"></option>
+        </select>
         
         <br><br>
         <input type="submit" value="Signup">
