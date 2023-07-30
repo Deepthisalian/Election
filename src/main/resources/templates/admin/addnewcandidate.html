@@ -13,10 +13,10 @@
         
         
         
-        <label for="existingConstituency">Select Existing Constituency:</label>
-        <select id="existingConstituency" name="existingConstituency" required>
-            <!-- Iterate over the list of existing constituencies and create options for each one -->
-            <option th:each="constituency : ${allConstituencies}" th:value="${constituency.id}" th:text="${constituency.name}"></option>
+        <label for="newConstituency">Select Existing Constituency:</label>
+        <select id="newConstituency" name="newConstituency" required>
+            
+            <option th:each="constituency : ${allConstituencies}" th:value="${constituency.name}" th:text="${constituency.name}"></option>
         </select>
         
         <br>

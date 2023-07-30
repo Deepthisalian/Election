@@ -2,6 +2,8 @@ package com.model;
 
 import javax.persistence.*;
 
+import com.repository.NewCandidateRepo;
+
 @Entity
 public class NewCandidate {
 
@@ -14,10 +16,16 @@ public class NewCandidate {
     @ManyToOne
     @JoinColumn(name = "constituency_id")
     private NewConstituency constituency;
+    
+    //NewCandidateRepo newCandidateRepository;
 
     private int voteCount;
     private Long id;
-
+    
+    public NewCandidate() {
+        // Default constructor with no arguments
+    }
+    
     public NewCandidate(String candidateName) {
     	this.name = candidateName;
 	}
@@ -28,7 +36,7 @@ public class NewCandidate {
 		return id;
 	}
 
-	public String getName() {
+	public String getCandidateName() {
 		return name;
 	}
 
@@ -44,7 +52,7 @@ public class NewCandidate {
 		this.id = id;
 	}
 
-	public void setName(String name) {
+	public void setCandidateName(String name) {
 		this.name = name;
 	}
 
@@ -62,6 +70,8 @@ public class NewCandidate {
 		return "NewCandidate [id=" + id + ", name=" + name + ", constituency=" + constituency + ", voteCount="
 				+ voteCount + "]";
 	}
+
+
 
     // Constructors, Getters, and Setters (Omitted for brevity)
 }

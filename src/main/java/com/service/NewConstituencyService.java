@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.model.Candidate;
+import com.model.NewCandidate;
 import com.model.NewConstituency;
 import com.repository.NewConstituencyRepo;
 
@@ -26,19 +27,29 @@ public class NewConstituencyService {
         return constituencyRepository.findAll();
     }
     
-    public void addCandidateToConstituency(Candidate candidate, Integer constituencyId) {
-        NewConstituency constituency = constituencyRepository.findById(constituencyId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Constituency ID"));
+    public void addCandidateToConstituency(NewCandidate newcandidate, String constituency) {
+        NewConstituency constituency1 = constituencyRepository.findByName(constituency);
+                
 
-        candidate.setConstituency(constituency);
-        constituency.getCandidates().add(candidate);
+        newcandidate.setConstituency(constituency1);
+        constituency1.getCandidates().add(newcandidate);
 
-        constituencyRepository.save(constituency);
+        constituencyRepository.save(constituency1);
     }
+
+	public NewConstituency getConstituencyByName(String newConstituency) {
+	
+		return constituencyRepository.findByName(newConstituency);
+	}
     
-    public NewConstituency getConstituencyByName(String constituencyName) {
-        return constituencyRepository.findByName(constituencyName);
-    }
+//    public NewConstituency getConstituencyByName(String constituencyName) {
+//        return constituencyRepository.findByName(constituencyName);
+//    }
+
+
+	
+
+	
 
     // Add other methods as needed for constituency management
 }

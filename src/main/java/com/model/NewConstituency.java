@@ -25,14 +25,14 @@ public class NewConstituency {
     
     
     @OneToMany(mappedBy = "constituency", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Candidate> candidates = new ArrayList<>();
+    private List<NewCandidate> newcandidates = new ArrayList<>();
   
 
-	public List<Candidate> getCandidates() {
-		return candidates;
+	public List<NewCandidate> getCandidates() {
+		return newcandidates;
 	}
-	public void setCandidates(List<Candidate> candidates) {
-		this.candidates = candidates;
+	public void setCandidates(List<NewCandidate> newcandidates) {
+		this.newcandidates = newcandidates;
 	}
 	public Long getId() {
 		return id;

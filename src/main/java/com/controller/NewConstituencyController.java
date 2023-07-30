@@ -27,10 +27,10 @@ public class NewConstituencyController {
     private NewCandidateService newcandidateService;
 
     @Autowired
-    public NewConstituencyController(NewConstituencyService constituencyService) {
+    public NewConstituencyController(NewConstituencyService constituencyService, NewCandidateService newcandidateService) {
         this.constituencyService = constituencyService;
+        this.newcandidateService = newcandidateService; // Initialize the newcandidateService
     }
-
 
     // Handler method to show the form for adding a new constituency
     @GetMapping("/addnewconstituency")
@@ -55,12 +55,11 @@ public class NewConstituencyController {
 
     // Handler method to process the form submission and add the new candidate to a constituency
 //    @PostMapping("/addnewcandidate")
-//    public String addCandidate(@ModelAttribute Candidate candidate, @RequestParam Integer constituencyId) {
-//    	if (constituencyId != null) {
-//            constituencyService.addCandidateToConstituency(candidate, constituencyId);
-//        }
-//    	
-//        return "redirect:/admin/" + constituencyId;
+//    public String addCandidate(@ModelAttribute Candidate candidate, @RequestParam String existingConstituency) {
+//    	 NewConstituency constituency = constituencyService.findByName(existingConstituency);
+//         candidate.setConstituency(constituency);
+//         constituencyService.saveCandidate(candidate);
+//         return "redirect:/admin/";
 //    }
     @GetMapping("/addnewcandidate")
     public String addnewConstituency(Model model) {
@@ -83,7 +82,9 @@ public class NewConstituencyController {
         if (constituency != null) {
             // Create a new candidate object and set its name
             NewCandidate newCandidate = new NewCandidate(candidateName);
-
+            
+            
+            newCandidate.setCandidateName(candidateName);
             // Set the constituency for the candidate
             newCandidate.setConstituency(constituency);
 
