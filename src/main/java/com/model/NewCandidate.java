@@ -7,11 +7,9 @@ import com.repository.NewCandidateRepo;
 @Entity
 public class NewCandidate {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-
-	private String name;
+	@Id
+    private String candidateName;
 
     @ManyToOne
     @JoinColumn(name = "constituency_id")
@@ -20,6 +18,7 @@ public class NewCandidate {
     //NewCandidateRepo newCandidateRepository;
 
     private int voteCount;
+    
     private Long id;
     
     public NewCandidate() {
@@ -27,7 +26,7 @@ public class NewCandidate {
     }
     
     public NewCandidate(String candidateName) {
-    	this.name = candidateName;
+    	this.candidateName = candidateName;
 	}
     
     
@@ -37,7 +36,7 @@ public class NewCandidate {
 	}
 
 	public String getCandidateName() {
-		return name;
+		return candidateName;
 	}
 
 	public NewConstituency getConstituency() {
@@ -52,8 +51,8 @@ public class NewCandidate {
 		this.id = id;
 	}
 
-	public void setCandidateName(String name) {
-		this.name = name;
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
 	}
 
 	public void setConstituency(NewConstituency constituency) {
@@ -67,7 +66,7 @@ public class NewCandidate {
 
 	@Override
 	public String toString() {
-		return "NewCandidate [id=" + id + ", name=" + name + ", constituency=" + constituency + ", voteCount="
+		return "NewCandidate [id=" + id + ", name=" + candidateName + ", constituency=" + constituency + ", voteCount="
 				+ voteCount + "]";
 	}
 
