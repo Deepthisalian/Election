@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.model.Admin;
 import com.model.Candidate;
+import com.model.NewCandidate;
 import com.model.NewConstituency;
 import com.model.User;
 import com.service.AdminService;
@@ -59,6 +60,7 @@ public class AdminController {
 		
 		
 //=======================================================================================================================================	
+	    
 	@RequestMapping("")
 	public String dashboard(Model m,Principal p)
 	{
@@ -68,28 +70,31 @@ public class AdminController {
 		int c2 = 0;
 		int c3 = 0;
 		int c4 = 0;
+		 
+		    	
+		    	List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
+		    	m.addAttribute("allCandidates", allCandidates);
+		        
 
-		List<Candidate> listc = cndServ.getAllCandidates();
-		for (Candidate v : listc) {
-			if (!v.getCandidate1().equals(""))
-				c1++;
-			if (!v.getCandidate2().equals(""))
-				c2++;
-			if (!v.getCandidate3().equals(""))
-				c3++;
-			if (!v.getCandidate4().equals(""))
-				c4++;
-		}
 
-		System.out.println(c1);
-		System.out.println(c2);
-		System.out.println(c3);
-		System.out.println(c4);
+//		List<Candidate> listc = cndServ.getAllCandidates();
+//		for (Candidate v : listc) {
+//			if (!v.getCandidate1().equals(""))
+//				c1++;
+//			if (!v.getCandidate2().equals(""))
+//				c2++;
+//			if (!v.getCandidate3().equals(""))
+//				c3++;
+//			if (!v.getCandidate4().equals(""))
+//				c4++;
+//		}
+//
+//		System.out.println(c1);
+//		System.out.println(c2);
+//		System.out.println(c3);
+//		System.out.println(c4);
 
-		m.addAttribute("c1", c1);
-		m.addAttribute("c2", c2);
-		m.addAttribute("c3", c3);
-		m.addAttribute("c4", c4);
+
 		
 		m.addAttribute("title","Admin Home");
 		
@@ -160,17 +165,17 @@ public class AdminController {
 				int c3=0;
 				int c4=0;
 				
-				List<Candidate> listc = cndServ.getAllCandidates();
-				for (Candidate v : listc) {
-					if (!v.getCandidate1().equals(""))
-						c1++;
-					if (!v.getCandidate2().equals(""))
-						c2++;
-					if (!v.getCandidate3().equals(""))
-						c3++;
-					if (!v.getCandidate4().equals(""))
-						c4++;
-				}
+//				List<Candidate> listc = cndServ.getAllCandidates();
+//				for (Candidate v : listc) {
+//					if (!v.getCandidate1().equals(""))
+//						c1++;
+//					if (!v.getCandidate2().equals(""))
+//						c2++;
+//					if (!v.getCandidate3().equals(""))
+//						c3++;
+//					if (!v.getCandidate4().equals(""))
+//						c4++;
+//				}
 
 
 				
@@ -203,35 +208,35 @@ public class AdminController {
 						public String viewcandidates(Model m)
 						{
 							
-							List<Candidate> candidates = cndServ.getAllCandidates();
-						
-							m.addAttribute("candidates", candidates);
-							m.addAttribute("title","All Votes Details");
-							
-							
-							// view total number of votes
-							int c1=0;
-							int c2=0;
-							int c3=0;
-							int c4=0;
-							
-							List<Candidate> listc = cndServ.getAllCandidates();
-							for(Candidate v : listc)
-							{
-								if(!v.getCandidate1().equals(""))
-									c1= c1 + 1;
-								if(!v.getCandidate2().equals(""))
-									c2= c2 + 1;
-								if(!v.getCandidate3().equals(""))
-									c3= c3 + 1;
-								if(!v.getCandidate4().equals(""))
-									c4= c4 + 1;
-							}
-							
-							m.addAttribute("c1",c1);
-							m.addAttribute("c2",c2);
-							m.addAttribute("c3",c3);
-							m.addAttribute("c4",c4);
+//							List<Candidate> candidates = cndServ.getAllCandidates();
+//						
+//							m.addAttribute("candidates", candidates);
+//							m.addAttribute("title","All Votes Details");
+//							
+//							
+//							// view total number of votes
+//							int c1=0;
+//							int c2=0;
+//							int c3=0;
+//							int c4=0;
+//							
+//							List<Candidate> listc = cndServ.getAllCandidates();
+//							for(Candidate v : listc)
+//							{
+//								if(!v.getCandidate1().equals(""))
+//									c1= c1 + 1;
+//								if(!v.getCandidate2().equals(""))
+//									c2= c2 + 1;
+//								if(!v.getCandidate3().equals(""))
+//									c3= c3 + 1;
+//								if(!v.getCandidate4().equals(""))
+//									c4= c4 + 1;
+//							}
+//							
+//							m.addAttribute("c1",c1);
+//							m.addAttribute("c2",c2);
+//							m.addAttribute("c3",c3);
+//							m.addAttribute("c4",c4);
 							
 							
 							return "admin/votedetails";

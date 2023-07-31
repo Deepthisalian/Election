@@ -72,6 +72,12 @@
    						</th:block>
                         <br><br>
                         
+                        <tr th:each="e: ${admins}">
+      <td th:text="${e.id}"></td>
+      <td th:text="${e.name}"></td>
+      <td th:text="${e.password}"></td>    
+    </tr>
+                        
                         <input type="submit" value="Vote">
                     </form>
                     <!-- 2nd Col End -->

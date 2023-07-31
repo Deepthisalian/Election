@@ -23,7 +23,7 @@ import com.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
-	
+	@Autowired
 	private  NewConstituencyService constituencyService;
 
 	@Autowired

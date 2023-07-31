@@ -16,15 +16,17 @@
             <h3 th:text="${session.msg}" style="color:red"></h3>
         </div>
 
-        <h3>Candidate 1 : Total Votes = <b style="color: limegreen"><span th:text="${c1}"></span></b></h3>
-        <h3>Candidate 2 : Total Votes = <b style="color: limegreen"><span th:text="${c2}"></span></b></h3>
-        <h3>Candidate 3 : Total Votes = <b style="color: limegreen"><span th:text="${c3}"></span></b></h3>
-        <h3>Candidate 4 : Total Votes = <b style="color: limegreen"><span th:text="${c4}"></span></b></h3>
+        
 
-        <!-- Add a container div for the bar chart -->
-        <div id="voteChart" style="height: 400px;"></div>
-    </section>
-
-    
+          <table border="1">
+            <tr>
+                <th>Candidate Name</th>
+                <th>Total Votes</th>
+            </tr>
+            <tr th:each="candidate : ${allCandidates}">
+                <td th:text="${candidate.candidateName}"></td>
+                <td th:text="${candidate.voteCount}"></td>
+            </tr>
+        </table>
 </body>
 </html>
