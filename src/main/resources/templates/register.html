@@ -26,7 +26,7 @@
        Constituency:
         <select name="constituency" required>
            
-            <option th:each="constituency : ${allConstituencies}" th:value="${constituency.id}" th:text="${constituency.name}"></option>
+            <option th:each="constituency : ${allConstituencies}" th:value="${constituency.name}" th:text="${constituency.name}"></option>
         </select>
         
         <br><br>

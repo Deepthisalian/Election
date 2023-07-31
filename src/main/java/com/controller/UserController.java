@@ -51,6 +51,17 @@ public class UserController {
 
 		User user = userServ.getUserByEmail(userName);
 		
+        String constituencyName = user.getConstituency();
+        Long constituencyId = constituencyService.getConstituencyIdByName(constituencyName);
+        System.out.println("constituencyId ---------------"+ constituencyId );
+        //Add the constituencyId to the model
+        m.addAttribute("constituencyId", constituencyId);
+
+        List<NewCandidate> candidatesByConstituency = newCandidateService.getCandidatesByConstituency(constituencyId);
+        System.out.println("candidatesByConstituency---------"+candidatesByConstituency);
+        // Add the list of candidates to the model
+        m.addAttribute("candidatesByConstituency", candidatesByConstituency);
+
 		
 		String status = "Not Voted";
 		if (user.isHasVoted()== true) {
@@ -76,7 +87,7 @@ public class UserController {
     	
     	List<NewConstituency> allConstituencies = constituencyService.getAllConstituencies();
     	model.addAttribute("allConstituencies", allConstituencies);
-        model.addAttribute("newConstituency", new NewConstituency());
+        //model.addAttribute("newConstituency", new NewConstituency());
         return "user/dashboard";
     }
 

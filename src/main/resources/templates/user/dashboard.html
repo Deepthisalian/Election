@@ -59,24 +59,17 @@
                         Do Voting<br>
                         <input th:value="${user.email}" name="email" type="hidden">
                         <br>
-                        
-                        
-                        
-                        <br><br>
-                        <label>Select Candidate:</label>
+                      
                        
-                        
-                        <th:block th:each="candidate : ${allCandidates}">
-        				<input type="radio" name="candidate" th:value="${candidate.candidateName}" required>
-        				<label th:text="${candidate.candidateName}"></label><br><br>
-   						</th:block>
+                        <label>Select Candidate:</label><br><br>
+
+                        <th:block th:each="candidate : ${candidatesByConstituency}">
+                        	 
+                            <input type="radio" name="candidate" th:value="${candidate.candidateName}" required>
+                            <label th:text="${candidate.candidateName}"></label><br><br>
+                        </th:block>
                         <br><br>
                         
-                        <tr th:each="e: ${admins}">
-      <td th:text="${e.id}"></td>
-      <td th:text="${e.name}"></td>
-      <td th:text="${e.password}"></td>    
-    </tr>
                         
                         <input type="submit" value="Vote">
                     </form>

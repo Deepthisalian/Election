@@ -46,9 +46,18 @@ public class NewCandidateService {
 //        return candidates;
 		return newcandidateRepository.findAll();
 	}
+	
+	
+	
 	public NewCandidate getCandidateByName(String candidateName) {
         return newcandidateRepository.findByCandidateName(candidateName);
     }
+
+	public List<NewCandidate> getCandidatesByConstituency(Long constituencyId) {
+		return newcandidateRepository.findByConstituencyId(constituencyId);
+	}
+
+	
 
 //    public List<NewCandidate> getAllCandidates() {
 //        return newcandidateRepository.findAll();

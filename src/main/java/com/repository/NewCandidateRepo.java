@@ -14,7 +14,10 @@ public interface NewCandidateRepo extends JpaRepository<NewCandidate, Integer> {
 	List<NewCandidate> findAll();
 
 	NewCandidate findByCandidateName(String candidateName);
-	 
+
+	List<NewCandidate> findByConstituencyId(Long constituencyId);
+	
+	
 }
 
 

@@ -42,6 +42,13 @@ public class NewConstituencyService {
 		return constituencyRepository.findByName(newConstituency);
 	}
     
+	
+	//imp
+	public Long getConstituencyIdByName(String constituencyName) {
+        NewConstituency constituency = constituencyRepository.findByName(constituencyName);
+        System.out.println("hello----------------"+constituency.getId());
+        return constituency != null ? constituency.getId() : null;
+    }
 //    public NewConstituency getConstituencyByName(String constituencyName) {
 //        return constituencyRepository.findByName(constituencyName);
 //    }
