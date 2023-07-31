@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.model.NewCandidate;
 import com.model.NewConstituency;
 import com.model.User;
+import com.repository.NewCandidateRepo;
 import com.repository.NewConstituencyRepo;
 import com.repository.UserRepository;
 
@@ -15,6 +17,9 @@ import com.repository.UserRepository;
 public class UserService {
 	
 	 private  NewConstituencyRepo constituencyRepository;
+	 
+	 private  NewCandidateRepo newCandidateRepository;
+	 
 	
 	@Autowired
 	private UserRepository userrepo;
@@ -52,6 +57,10 @@ public class UserService {
 	
 	public List<NewConstituency> getAllConstituencies() {
         return constituencyRepository.findAll();
+    }
+	
+	public List<NewCandidate> getAllCandidates() {
+        return newCandidateRepository.findAll();
     }
 	
 	

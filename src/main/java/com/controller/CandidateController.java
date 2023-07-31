@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model.Candidate;
-
+import com.model.NewCandidate;
+import com.model.NewConstituency;
 import com.service.CandidateService;
+import com.service.NewCandidateService;
 
 
 
@@ -21,6 +24,8 @@ public class CandidateController {
 	
 	@Autowired
 	private CandidateService cndServ;
+	
+	private NewCandidateService newCandidateService;
 	
 
 	
@@ -59,7 +64,13 @@ public class CandidateController {
 			cndServ.addCandidate(cnd);
 			
 			session.setAttribute("msg", "Successfully Voted...");
+			
+			
+			
+			
 		}
+		
+		
 		
 		return "redirect:user/";
 	}

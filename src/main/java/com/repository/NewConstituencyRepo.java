@@ -14,5 +14,5 @@ public interface NewConstituencyRepo extends JpaRepository<NewConstituency, Inte
 	 
 
 	
-    // You can add custom query methods here if needed
+    
 }

@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.model.NewCandidate;
 import com.model.NewConstituency;
 import com.model.User;
 import com.service.CandidateService;
+import com.service.NewCandidateService;
 import com.service.NewConstituencyService;
 import com.service.UserService;
 
@@ -23,7 +25,10 @@ public class UserController {
 	
 	
 	private  NewConstituencyService constituencyService;
-	
+
+	@Autowired
+	private  NewCandidateService newCandidateService;
+
 	@Autowired
 	private UserService userServ;
 	
@@ -32,7 +37,16 @@ public class UserController {
 	
 	@RequestMapping("")
 	public String dashboard(Model m,Principal p)
+	
 	{
+		
+		List<NewCandidate> allCandidates = newCandidateService.getAllCandidates();
+    	m.addAttribute("allCandidates", allCandidates);
+		
+		
+
+
+    	
 		String userName = p.getName(); // it will give the username(email) of person who is login		
 
 		User user = userServ.getUserByEmail(userName);
@@ -50,6 +64,8 @@ public class UserController {
 		
 		
 		m.addAttribute("title","Voter Home");
+		
+		
 		
 		
 		return "user/dashboard";
@@ -70,5 +86,20 @@ public class UserController {
         constituencyService.addConstituency(newConstituency);
         return "user/dashboard"; // Redirect to the admin dashboard or another page
     }
+//    @GetMapping("user/")
+//    public String addCandidate(Model model) {
+//    	
+//    	List<NewCandidate> allCandidates =newCandidateService.getAllCandidates();
+//    	model.addAttribute("allCandidates", allCandidates);
+//        //model.addAttribute("newConstituency", new NewConstituency());
+//        return "user/dashboard";
+//    }
+
+    // Handler method to process the form submission and add the new constituency
+//    @PostMapping("/register")
+//    public String addCandidate(@ModelAttribute NewConstituency newConstituency) {
+//        constituencyService.addConstituency(newConstituency);
+//        return "user/dashboard"; // Redirect to the admin dashboard or another page
+//    }
 
 }

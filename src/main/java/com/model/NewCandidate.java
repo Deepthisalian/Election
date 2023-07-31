@@ -5,9 +5,19 @@ import javax.persistence.*;
 import com.repository.NewCandidateRepo;
 
 @Entity
+@Table(name = "new_candidate")
 public class NewCandidate {
 
     
+	public NewCandidate(String candidateName, NewConstituency constituency, int voteCount, Long id) {
+		super();
+		this.candidateName = candidateName;
+		this.constituency = constituency;
+		this.voteCount = voteCount;
+		this.id = id;
+	}
+
+
 	@Id
     private String candidateName;
 
