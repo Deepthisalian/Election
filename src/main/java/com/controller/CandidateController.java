@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.model.Candidate;
 import com.model.NewCandidate;
 import com.model.NewConstituency;
+import com.model.User;
 import com.service.CandidateService;
 import com.service.NewCandidateService;
+import com.service.UserService;
 
 
 
@@ -28,6 +30,9 @@ public class CandidateController {
 	@Autowired
 	private NewCandidateService newCandidateService;
 	
+	@Autowired
+	private UserService userService;
+	
 
 	
 	@PostMapping("/addcandidate")
@@ -36,10 +41,12 @@ public class CandidateController {
 	{
 		String email = p.getName();
 		
-		if (cndServ.getCandByUser(email) != null) {
-					
-			session.setAttribute("msg", "Already Voted");
-		}
+		
+	    User user = userService.getUserByEmail(email);
+		
+	    if (user.isHasVoted()) {
+	        session.setAttribute("msg", "You have already voted.");
+	    }
 		//String candidate1 = "";
 //			String candidate2 = "";
 //			String candidate3 = "";
@@ -65,16 +72,22 @@ public class CandidateController {
 //			session.setAttribute("msg", "Successfully Voted...");
 			
 			else {
+				
+				user.setHasVoted(true);
+		        //userService.saveUser(user);
 	            NewCandidate selectedCandidate = newCandidateService.getCandidateByName(candidate);
 
 	            if (selectedCandidate != null) {
 	                selectedCandidate.setVoteCount(selectedCandidate.getVoteCount() + 1);
 	                newCandidateService.saveCandidate(selectedCandidate);
+	                
+	               
 	                session.setAttribute("msg", "Successfully Voted...");
 	            } else {
 	                session.setAttribute("msg", "Candidate not found.");
 	            }
-	        
+	            
+	            
 			
 			
 			

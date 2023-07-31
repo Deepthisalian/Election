@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,18 @@ public class User {
 			)
 	List<Role> roles = new ArrayList<>();
 	
+	@Column(nullable = false)
+    private boolean hasVoted = false;
+
+	
+	public boolean isHasVoted() {
+		return hasVoted;
+	}
+
+	public void setHasVoted(boolean hasVoted) {
+		this.hasVoted = hasVoted;
+	}
+
 	public User()
 	{
 		
@@ -121,6 +134,8 @@ public User(int id,String name, String password, String email, int phone, List<R
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", phone=" + phone
 				+ ", roles=" + roles + "]";
 	}
+
+	
 
 	
 	

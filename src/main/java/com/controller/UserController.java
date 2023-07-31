@@ -53,7 +53,7 @@ public class UserController {
 		
 		
 		String status = "Not Voted";
-		if (cndServ.getCandByUser(userName) != null) {
+		if (user.isHasVoted()== true) {
 			
 			status = "Voted";
 		}

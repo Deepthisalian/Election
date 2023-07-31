@@ -25,44 +25,6 @@
         <div id="voteChart" style="height: 400px;"></div>
     </section>
 
-    <!-- Script block for generating the bar chart -->
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            // Get the data for the chart from Thymeleaf variables
-            var c1Votes = 10;
-            var c2Votes = 20;
-            var c3Votes =40;
-            var c4Votes = 30;
-            
-            
-            
-
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Candidate');
-            data.addColumn('number', 'Total Votes');
-            data.addRows([
-                ['Candidate 1', c1Votes],
-                ['Candidate 2', c2Votes],
-                ['Candidate 3', c3Votes],
-                ['Candidate 4', c4Votes]
-            ]);
-
-            // Set chart options
-            var options = {
-                title: 'Candidate Votes',
-                vAxis: {title: 'Total Votes'},
-                hAxis: {title: 'Candidate'},
-                legend: 'none'
-            };
-
-            // Instantiate and draw the chart
-            var chart = new google.visualization.ColumnChart(document.getElementById('voteChart'));
-            chart.draw(data, options);
-        }
-    </script>
+    
 </body>
 </html>
