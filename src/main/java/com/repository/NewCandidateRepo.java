@@ -12,6 +12,8 @@ import com.model.NewConstituency;
 public interface NewCandidateRepo extends JpaRepository<NewCandidate, Integer> {
 	
 	List<NewCandidate> findAll();
+
+	NewCandidate findByCandidateName(String candidateName);
 	 
 }
 

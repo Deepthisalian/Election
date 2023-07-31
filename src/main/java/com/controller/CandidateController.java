@@ -25,6 +25,7 @@ public class CandidateController {
 	@Autowired
 	private CandidateService cndServ;
 	
+	@Autowired
 	private NewCandidateService newCandidateService;
 	
 
@@ -39,31 +40,41 @@ public class CandidateController {
 					
 			session.setAttribute("msg", "Already Voted");
 		}
-		else
-		{
-			String candidate1 = "";
-			String candidate2 = "";
-			String candidate3 = "";
-			String candidate4 = "";
-
-			if (candidate.equals("candidate1"))
-				candidate1 = email;
-			else if (candidate.equals("candidate2"))
-				candidate2 = email;
-			else if (candidate.equals("candidate3"))
-				candidate3 = email;
-			else if (candidate.equals("candidate4"))
-				candidate4 = email;
-
-			Candidate cnd = new Candidate();
-			cnd.setCandidate1(candidate1);
-			cnd.setCandidate2(candidate2);
-			cnd.setCandidate3(candidate3);
-			cnd.setCandidate4(candidate4);
-
-			cndServ.addCandidate(cnd);
+		//String candidate1 = "";
+//			String candidate2 = "";
+//			String candidate3 = "";
+//			String candidate4 = "";
+//
+//			if (candidate.equals("candidate1"))
+//				candidate1 = email;
+//			else if (candidate.equals("candidate2"))
+//				candidate2 = email;
+//			else if (candidate.equals("candidate3"))
+//				candidate3 = email;
+//			else if (candidate.equals("candidate4"))
+//				candidate4 = email;
+//
+//			Candidate cnd = new Candidate();
+//			cnd.setCandidate1(candidate1);
+//			cnd.setCandidate2(candidate2);
+//			cnd.setCandidate3(candidate3);
+//			cnd.setCandidate4(candidate4);
+//
+//			cndServ.addCandidate(cnd);
+//			
+//			session.setAttribute("msg", "Successfully Voted...");
 			
-			session.setAttribute("msg", "Successfully Voted...");
+			else {
+	            NewCandidate selectedCandidate = newCandidateService.getCandidateByName(candidate);
+
+	            if (selectedCandidate != null) {
+	                selectedCandidate.setVoteCount(selectedCandidate.getVoteCount() + 1);
+	                newCandidateService.saveCandidate(selectedCandidate);
+	                session.setAttribute("msg", "Successfully Voted...");
+	            } else {
+	                session.setAttribute("msg", "Candidate not found.");
+	            }
+	        
 			
 			
 			
@@ -74,6 +85,8 @@ public class CandidateController {
 		
 		return "redirect:user/";
 	}
+	
+	
 	
 	
 
