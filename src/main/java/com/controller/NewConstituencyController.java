@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.model.Candidate;
+
 import com.model.NewCandidate;
 import com.model.NewConstituency;
 import com.service.NewCandidateService;
@@ -48,19 +48,7 @@ public class NewConstituencyController {
         constituencyService.addConstituency(newConstituency);
         return "redirect:/admin/"; // Redirect to the admin dashboard or another page
     }
-    
-   
-    
-    
 
-    // Handler method to process the form submission and add the new candidate to a constituency
-//    @PostMapping("/addnewcandidate")
-//    public String addCandidate(@ModelAttribute Candidate candidate, @RequestParam String existingConstituency) {
-//    	 NewConstituency constituency = constituencyService.findByName(existingConstituency);
-//         candidate.setConstituency(constituency);
-//         constituencyService.saveCandidate(candidate);
-//         return "redirect:/admin/";
-//    }
     @GetMapping("/addnewcandidate")
     public String addnewConstituency(Model model) {
     	
@@ -91,11 +79,10 @@ public class NewConstituencyController {
             // Save the candidate to the database
             newcandidateService.saveCandidate(newCandidate);
 
-            // Redirect to the admin dashboard or another page after successful submission
+         
             return "redirect:/admin/";
         } else {
-            // Handle the case where the specified constituency doesn't exist
-            // You can add appropriate error handling here or redirect to an error page
+          
             return "redirect:/admin/addnewconstituency";} // Redirect back to the form page
         }
         public String addnewConstituency(@ModelAttribute NewConstituency newConstituency) {
@@ -105,9 +92,4 @@ public class NewConstituencyController {
     }
 	
 
-
-    // Handler method to view all constituencies (optional)
-
-
-    // Add other handler methods for constituency management if needed
 }

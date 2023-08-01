@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.model.NewCandidate;
 import com.model.NewConstituency;
 import com.model.User;
-import com.service.CandidateService;
 import com.service.NewCandidateService;
 import com.service.NewConstituencyService;
 import com.service.UserService;
@@ -31,9 +30,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userServ;
-	
-	@Autowired
-	private CandidateService cndServ;
+
 	
 	@RequestMapping("")
 	public String dashboard(Model m,Principal p)
@@ -97,20 +94,5 @@ public class UserController {
         constituencyService.addConstituency(newConstituency);
         return "user/dashboard"; // Redirect to the admin dashboard or another page
     }
-//    @GetMapping("user/")
-//    public String addCandidate(Model model) {
-//    	
-//    	List<NewCandidate> allCandidates =newCandidateService.getAllCandidates();
-//    	model.addAttribute("allCandidates", allCandidates);
-//        //model.addAttribute("newConstituency", new NewConstituency());
-//        return "user/dashboard";
-//    }
-
-    // Handler method to process the form submission and add the new constituency
-//    @PostMapping("/register")
-//    public String addCandidate(@ModelAttribute NewConstituency newConstituency) {
-//        constituencyService.addConstituency(newConstituency);
-//        return "user/dashboard"; // Redirect to the admin dashboard or another page
-//    }
 
 }

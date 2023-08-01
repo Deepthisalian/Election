@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.model.Candidate;
+
 import com.model.NewCandidate;
 import com.model.NewConstituency;
 import com.repository.NewConstituencyRepo;

@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.security.Principal;
+import java.util.*;
 import com.google.gson.Gson;
 import java.util.List;
 
@@ -16,24 +17,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.model.Admin;
-import com.model.Candidate;
+
 import com.model.NewCandidate;
 import com.model.NewConstituency;
 import com.model.User;
 import com.service.AdminService;
-import com.service.CandidateService;
+
 import com.service.NewCandidateService;
 import com.service.NewConstituencyService;
 import com.service.RoleService;
 import com.service.UserService;
+import java.util.ArrayList;
 
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
-	@Autowired
-	private CandidateService cndServ;
+
 	
 	@Autowired
 	private AdminService admServ;
@@ -66,100 +67,21 @@ public class AdminController {
 	public String dashboard(Model m,Principal p)
 	{
 		
-		// view total number of votes
-		int c1 = 0;
-		int c2 = 0;
-		int c3 = 0;
-		int c4 = 0;
-		 
-		    	
+
 		List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
 		m.addAttribute("allCandidates", allCandidates);
-		        
-
-
-//		List<Candidate> listc = cndServ.getAllCandidates();
-//		for (Candidate v : listc) {
-//			if (!v.getCandidate1().equals(""))
-//				c1++;
-//			if (!v.getCandidate2().equals(""))
-//				c2++;
-//			if (!v.getCandidate3().equals(""))
-//				c3++;
-//			if (!v.getCandidate4().equals(""))
-//				c4++;
-//		}
-//
-//		System.out.println(c1);
-//		System.out.println(c2);
-//		System.out.println(c3);
-//		System.out.println(c4);
-
-
-		
 		m.addAttribute("title","Admin Home");
 		
 		return "admin/dashboard";
 	}
 	
 //=======================================================================================================================================	
-	
-	// viewadmins
-	@GetMapping("/viewadmins")
-				@RequestMapping("viewadmins")
-				public String viewadmins(Model m)
-				{
-					String dest = "viewadmins";
-					
-					
-					List<Admin> admins = admServ.getAllAdmin();
-					
-					m.addAttribute("admins", admins);
-					m.addAttribute("title","View Admins");
-					
-					return "admin/viewadmins";
-				}
-//=======================================================================================================================================	
-	
-	// viewusers
-			@GetMapping("viewusers")
-			public String viewuser(Model m)
-			{
-				
-				
-				List<User> users = userServ.getAllUsers();
-				
-				m.addAttribute("users", users);
-				m.addAttribute("title","All Voter's Details");
-				
-				return "admin/viewusers";
-			}
-				
-			
-			// view user which is to update
-			@GetMapping("/edituser/{id}")
-			public String edit(@PathVariable int id,Model m)
-			{
-				User user = userServ.getUserById(id);
-					
-				m.addAttribute("user",user);
-				
-				return "admin/edituser";
-			}
-			
-			// update user
-			@PostMapping("/updateuser")
-			public String updateemp(@ModelAttribute User user,javax.servlet.http.HttpSession session)
-			{
-				userServ.addUser(user);
-				
-				session.setAttribute("msg", "User updated successfully...");
-				
-				return "redirect:/admin/viewusers";
-			}
+
 			
 			@GetMapping("/displayresults")
 			public String displayResults(Model m) {
+				
+				
 			    List<NewConstituency> allConstituencies = constituencyService.getAllConstituencies();
 			    
 			    m.addAttribute("allConstituencies", allConstituencies);
@@ -167,97 +89,24 @@ public class AdminController {
 			    List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
 				m.addAttribute("allCandidates", allCandidates);
 				
+				//List<NewConstituency> allConstituencies = newConstituencyService.getAllConstituencies();
+			    Map<Long, List<NewCandidate>> candidatesByConstituencies = new HashMap<>();
+
+			    for (NewConstituency constituency : allConstituencies) {
+			        List<NewCandidate> candidates = newcandidateService.getCandidatesByConstituency(constituency.getId());
+			        candidatesByConstituencies.put(constituency.getId(), candidates);
+			    }
+
+			    m.addAttribute("allConstituencies", allConstituencies);
+			    m.addAttribute("candidatesByConstituencies", candidatesByConstituencies);
+		        
+		        System.out.println("candidatesByConstituencies---------"+ candidatesByConstituencies);
+				
 				
 			    return "admin/displayresults";
-			}
+			}}
 
 
-//		    public String displayResults(Model m) {
-//				
-//				Long constituencyId = 13L; // Replace 1L with the actual ID of the constituency you want to display
-//		        List<NewCandidate> candidatesByConstituency = newcandidateService.getCandidatesByConstituency(constituencyId);
-//		        System.out.println("candidatesByConstituency----------");
-//		        m.addAttribute("candidatesByConstituency", candidatesByConstituency);
-//		        
-//		        return "admin/displayresults"; // Return the name of the Thymeleaf template to display the results
-//		    }
-//			
-			 
-				
-			// delete user
-			@GetMapping("/deleteuser/{id}")
-			public String deleteemp(@PathVariable int id,HttpSession session)
-			{
-				userServ.deleteUser(id);
-				
-				session.setAttribute("msg", "User deleted successfully...");
-				
-				return "redirect:/admin/viewusers";
-			}
-			
 //=======================================================================================================================================	
-				
-			// viewcandidates
-						@GetMapping("votedetails")
-						public String viewcandidates(Model m)
-						{
-							
-//							List<Candidate> candidates = cndServ.getAllCandidates();
-//						
-//							m.addAttribute("candidates", candidates);
-//							m.addAttribute("title","All Votes Details");
-//							
-//							
-//							// view total number of votes
-//							int c1=0;
-//							int c2=0;
-//							int c3=0;
-//							int c4=0;
-//							
-//							List<Candidate> listc = cndServ.getAllCandidates();
-//							for(Candidate v : listc)
-//							{
-//								if(!v.getCandidate1().equals(""))
-//									c1= c1 + 1;
-//								if(!v.getCandidate2().equals(""))
-//									c2= c2 + 1;
-//								if(!v.getCandidate3().equals(""))
-//									c3= c3 + 1;
-//								if(!v.getCandidate4().equals(""))
-//									c4= c4 + 1;
-//							}
-//							
-//							m.addAttribute("c1",c1);
-//							m.addAttribute("c2",c2);
-//							m.addAttribute("c3",c3);
-//							m.addAttribute("c4",c4);
-							
-							
-							return "admin/votedetails";
-						}
-						
-						
-			
-						// deletecandidate
-						
-						@GetMapping("/deletecandidate/{id}")
-						public String deleteVote(@PathVariable("id") int id,HttpSession session)
-						{
-							
-							cndServ.deleteCandidate(id);
-							session.setAttribute("msg", "Vote Deleted Sucessfully");
-							
-							return "redirect:/admin/votedetails";
-						}
-					  
-					}
-						
-//						 
-			
-			
-			
-			
-	
-//=======================================================================================================================================	
-	
+
 

@@ -66,16 +66,7 @@ public class HomeController {
         m.addAttribute("newConstituency", new NewConstituency());
 		return "register";
 	}
-	
-	
-	@GetMapping("/about")
-	public String about(Model m)
-	{
-		m.addAttribute("title","About");
-		return "about";
-	}
 
-	
 	@PostMapping("/createuser")
 	public String createuser(@ModelAttribute User user,HttpSession session)
 	{		

@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
 	<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+	<link rel="stylesheet" th:href="@{/css/bootstrap2.css}" />
+	<link rel="stylesheet" th:href="@{/css/table.css}" />
     <title>Add New Constituency</title>
     
 </head>
 <body>
+<!-- Navbar -->
+
+  <ul>
+  <li><a th:href="@{/admin/}">Home</a></li>
+   <li><a>Welcome Admin</a></li>
+     
+     <li><a class="active" th:href="@{/admin/addnewconstituency}">Add Constituency</a></li>
+     <li><a th:href="@{/admin/addnewcandidate}">Add Candidate</a></li>
+     
+     <li><a th:href="@{/admin/displayresults}" target ="_blank">Display Results</a></li>
+
+  <li><a th:href="@{/logout}">Logout</a></li>
+</ul>
+
+    <!-- Navbar End -->
     <h2>Add New Constituency</h2>
+     <section class="center">
      
     <form th:action="@{/admin/addnewconstituency}" method="post">
         
         
-        
+        <br><br><br>
         <label for="constituencyName">Constituency Name:</label>
         <input type="text" id="constituencyName" name="name" required>
+        <br><br><br>
         <button type="submit">Add Constituency</button>
+        <br><br><br>
     </form>
+    </section>
 </body>
 </html>
 

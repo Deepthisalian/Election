@@ -3,6 +3,40 @@
 <head>
     <meta charset="UTF-8" />
     <title>Document</title>
+    
+    <style>
+        /* Styling for the timer container */
+        .timer-container {
+            margin-top: 20px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        /* Styling for the progress bar */
+        .progress-bar-container {
+            background-color: lightgray;
+            height: 20px;
+            width: 100%;
+        }
+
+        .progress-bar {
+            background-color: lightblue;
+            height: 100%;
+            width: 100%;
+            animation: timer-countdown 180s linear;
+            animation-fill-mode: forwards;
+        }
+
+        /* Keyframes animation for the progress bar */
+        @keyframes timer-countdown {
+            0% {
+                width: 100%;
+            }
+            100% {
+                width: 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <section class="center">
@@ -78,6 +112,50 @@
             </div>
         </div>
         <br>
+        
+        <!-- Timer display using HTML and JavaScript -->
+        <div class="timer-container">
+            <h2>Timer: <span id="timer">03:00</span></h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <!-- Redirect to logout page after timer expires -->
+        <meta http-equiv="refresh" content="180;url=/logout">
+        
     </section>
+    
+    <form id="logoutForm" th:action="@{/logout}" method="post">
+        <!-- Logout form -->
+    </form>
+
+    <script>
+        // JavaScript to update the countdown timer text
+        var timerDisplay = document.getElementById("timer");
+        var progressBar = document.querySelector(".progress-bar");
+        var duration = 180; // Duration in seconds
+
+        function updateTimer() {
+            var minutes = Math.floor(duration / 60);
+            var seconds = duration % 60;
+
+            var formattedMinutes = minutes.toString().padStart(2, "0");
+            var formattedSeconds = seconds.toString().padStart(2, "0");
+
+            timerDisplay.textContent = formattedMinutes + ":" + formattedSeconds;
+            progressBar.style.width = (duration / 180 * 100) + "%";
+
+            duration--;
+
+            if (duration < 0) {
+                // Timer has expired, redirect to the logout page
+                window.location.href = "/logout";
+            }
+        }
+
+        // Update the timer every second
+        setInterval(updateTimer, 1000);
+    </script>
 </body>
 </html>

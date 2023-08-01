@@ -56,6 +56,8 @@ public class NewCandidateService {
 	public List<NewCandidate> getCandidatesByConstituency(Long constituencyId) {
 		return newcandidateRepository.findByConstituencyId(constituencyId);
 	}
+	
+	
 
 	
 
