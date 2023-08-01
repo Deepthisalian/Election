@@ -3,46 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Results</title>
-    <!-- Load Google Charts library -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        /* Styling for the bar graph */
+        .bar-graph {
+            margin-top: 20px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            height: 30px;
+            background-color: lightblue;
+            border: 1px solid #000;
+        }
+
+        .bar-label {
+            min-width: 120px;
+            padding-right: 10px;
+            text-align: right;
+        }
+
+        .bar-progress {
+            background-color: blue;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-    <div id="chart_div" style="width: 100%; height: 400px;"></div>
+    <h1>Results</h1>
 
-    <script type="text/javascript">
-        // Load the Visualization API and the corechart package
-        google.charts.load('current', {'packages':['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Candidate');
-            data.addColumn('number', 'Total Votes');
-
-            // Replace the hardcoded data with Thymeleaf expressions
-            
-            data.addRows([
-                ['Candidate 1', [[${c1}]]],
-                ['Candidate 2', [[${c2}]]],
-                ['Candidate 3', [[${c3}]]],
-                ['Candidate 4',[[${c4}]]]
-            ]);
-
-            // Set chart options
-            var options = {
-                title: 'Candidate Votes',
-                vAxis: {title: 'Total Votes'},
-                hAxis: {title: 'Candidate'},
-                legend: 'none'
-            };
-
-            // Instantiate and draw the chart
-            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
-    </script>
+    <div class="bar-graph">
+        <h2>Candidates' Votes</h2>
+        <!-- Loop through candidatesByConstituency to display the bars -->
+        <div th:each="candidate : ${allCandidates}" class="bar">
+            <div class="bar-label" th:text="${candidate.candidateName}"></div>
+            <div class="bar-progress" th:style="'width: ' + (${candidate.voteCount} * 10) + '%;'"></div>
+            <div th:text="${candidate.voteCount}"></div>
+        </div>
+    </div>
 </body>
 </html>

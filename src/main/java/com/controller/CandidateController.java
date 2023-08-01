@@ -47,29 +47,6 @@ public class CandidateController {
 	    if (user.isHasVoted()) {
 	        session.setAttribute("msg", "You have already voted.");
 	    }
-		//String candidate1 = "";
-//			String candidate2 = "";
-//			String candidate3 = "";
-//			String candidate4 = "";
-//
-//			if (candidate.equals("candidate1"))
-//				candidate1 = email;
-//			else if (candidate.equals("candidate2"))
-//				candidate2 = email;
-//			else if (candidate.equals("candidate3"))
-//				candidate3 = email;
-//			else if (candidate.equals("candidate4"))
-//				candidate4 = email;
-//
-//			Candidate cnd = new Candidate();
-//			cnd.setCandidate1(candidate1);
-//			cnd.setCandidate2(candidate2);
-//			cnd.setCandidate3(candidate3);
-//			cnd.setCandidate4(candidate4);
-//
-//			cndServ.addCandidate(cnd);
-//			
-//			session.setAttribute("msg", "Successfully Voted...");
 			
 			else {
 				

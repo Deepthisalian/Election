@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.security.Principal;
+import com.google.gson.Gson;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -72,8 +73,8 @@ public class AdminController {
 		int c4 = 0;
 		 
 		    	
-		    	List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
-		    	m.addAttribute("allCandidates", allCandidates);
+		List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
+		m.addAttribute("allCandidates", allCandidates);
 		        
 
 
@@ -158,36 +159,29 @@ public class AdminController {
 			}
 			
 			@GetMapping("/displayresults")
-		    public String displayResults(Model m) {
+			public String displayResults(Model m) {
+			    List<NewConstituency> allConstituencies = constituencyService.getAllConstituencies();
+			    
+			    m.addAttribute("allConstituencies", allConstituencies);
+			    
+			    List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
+				m.addAttribute("allCandidates", allCandidates);
 				
-				int c1=0;
-				int c2=0;
-				int c3=0;
-				int c4=0;
 				
-//				List<Candidate> listc = cndServ.getAllCandidates();
-//				for (Candidate v : listc) {
-//					if (!v.getCandidate1().equals(""))
-//						c1++;
-//					if (!v.getCandidate2().equals(""))
-//						c2++;
-//					if (!v.getCandidate3().equals(""))
-//						c3++;
-//					if (!v.getCandidate4().equals(""))
-//						c4++;
-//				}
+			    return "admin/displayresults";
+			}
 
 
-				
-				
-				m.addAttribute("c1",c1);
-				m.addAttribute("c2",c2);
-				m.addAttribute("c3",c3);
-				m.addAttribute("c4",c4);
-		        
-		        return "admin/displayresults"; // Return the name of the Thymeleaf template to display the results
-		    }
-			
+//		    public String displayResults(Model m) {
+//				
+//				Long constituencyId = 13L; // Replace 1L with the actual ID of the constituency you want to display
+//		        List<NewCandidate> candidatesByConstituency = newcandidateService.getCandidatesByConstituency(constituencyId);
+//		        System.out.println("candidatesByConstituency----------");
+//		        m.addAttribute("candidatesByConstituency", candidatesByConstituency);
+//		        
+//		        return "admin/displayresults"; // Return the name of the Thymeleaf template to display the results
+//		    }
+//			
 			 
 				
 			// delete user
