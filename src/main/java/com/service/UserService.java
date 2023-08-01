@@ -55,6 +55,11 @@ public class UserService {
 		return userrepo.getUserByEmail(email);
 	}
 	
+	public User getUserByPassword(String voterID)
+	{
+		return userrepo.getUserByPassword(voterID);
+	}
+	
 	public List<NewConstituency> getAllConstituencies() {
         return constituencyRepository.findAll();
     }
@@ -62,6 +67,8 @@ public class UserService {
 	public List<NewCandidate> getAllCandidates() {
         return newCandidateRepository.findAll();
     }
+
+	
 	
 	
 }

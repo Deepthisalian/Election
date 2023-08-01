@@ -85,6 +85,8 @@ public class NewConstituencyController {
           
             return "redirect:/admin/addnewconstituency";} // Redirect back to the form page
         }
+    
+    
         public String addnewConstituency(@ModelAttribute NewConstituency newConstituency) {
             constituencyService.addConstituency(newConstituency);
             return "user/dashboard"; // Redirect to the admin dashboard or another page

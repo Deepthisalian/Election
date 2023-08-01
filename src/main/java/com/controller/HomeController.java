@@ -71,6 +71,7 @@ public class HomeController {
 	public String createuser(@ModelAttribute User user,HttpSession session)
 	{		
 		int i= 0;
+		int vid = 0;
 		
 		try
 		{
@@ -92,10 +93,34 @@ public class HomeController {
 			session.setAttribute("msg","Registration Failed,Please try different email id");
 			return "redirect:/register";
 		}
+		
+		try
+		{
+		String voterID = user.getPassword();
+		
+			if(userserv.getUserByPassword(voterID) != null)
+			{
+				vid++;
+				System.out.println(vid+"vid----------");
+			}
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		if(vid >= 1)
+		{
+			session.setAttribute("msg","Registration Failed,Please try different voter id");
+			return "redirect:/register";
+		}
+		
+		
 			List<Role> r = new ArrayList<>();
 			r.add(roleserv.getRoleByName("ROLE_USER"));
 		
-			user.setRoles(r);
+			 user.setRoles(r);
 			 userserv.addUser(user);
 			
 			session.setAttribute("msg","Registration Successful...");

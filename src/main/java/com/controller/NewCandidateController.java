@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model.NewCandidate;
+import com.model.NewConstituency;
 import com.model.User;
 
 import com.service.NewCandidateService;
+import com.service.NewConstituencyService;
 import com.service.UserService;
 
 @Controller
@@ -26,6 +28,9 @@ public class NewCandidateController {
 	
 	@Autowired
 	private NewCandidateService newCandidateService;
+	
+	@Autowired
+	private NewConstituencyService newConstituencyService;
 	
 	@Autowired
 	private UserService userService;
@@ -61,12 +66,7 @@ public class NewCandidateController {
 	                session.setAttribute("msg", "Successfully Voted...");
 	            } else {
 	                session.setAttribute("msg", "Candidate not found.");
-	            }
-	            
-	            
-			
-			
-			
+	            }            	
 			
 		}
 		
@@ -74,6 +74,8 @@ public class NewCandidateController {
 		
 		return "redirect:user/";
 	}
+	
+
 	
 	
 	

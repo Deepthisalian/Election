@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+ <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+	<link rel="stylesheet" th:href="@{/css/bootstrap2.css}" />
+	<link rel="stylesheet" th:href="@{/css/table.css}" />
     <meta charset="UTF-8">
     <title>Results</title>
     <style>
@@ -33,8 +42,22 @@
     </style>
 </head>
 <body>
-    <h1>Results</h1>
+<!-- Navbar -->
 
+  <ul>
+  <li><a th:href="@{/admin/}">Home</a></li>
+   <li><a>Welcome Admin</a></li>
+     
+     <li><a th:href="@{/admin/addnewconstituency}">Add Constituency</a></li>
+     <li><a th:href="@{/admin/addnewcandidate}">Add Candidate</a></li>
+     
+     <li><a class="active" th:href="@{/admin/displayresults}" target ="_blank">Display Results</a></li>
+
+  <li><a th:href="@{/logout}">Logout</a></li>
+</ul>
+
+    <!-- Navbar End -->
+   
     <div class="bar-graph">
         <h2>Candidates' Votes</h2>
         <!-- Loop through candidatesByConstituency to display the bars -->

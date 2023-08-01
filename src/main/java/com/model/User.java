@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Voters")
+@Table(name = "new_voters")
 public class User {
 	
 	@Id
@@ -25,7 +25,7 @@ public class User {
 	private String name;
 	private String password;
 	private String email;
-	private int phone;
+	//private int phone;
 	private String constituency; 
 	
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
@@ -53,22 +53,22 @@ public class User {
 		
 	}
 	
-public User(int id,String name, String password, String email, int phone, List<Role> roles, String constituency) {
+public User(int id,String name, String password, String email, List<Role> roles, String constituency) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.email = email;
-		this.phone = phone;
+		//this.phone = phone;
 		this.roles = roles;
 		this.constituency=constituency;
 	}
 
-	public User(String name, String password, String email, int phone, List<Role> roles, String constituency) {
+	public User(String name, String password, String email, List<Role> roles, String constituency) {
 		
 		this.name = name;
 		this.password = password;
 		this.email = email;
-		this.phone = phone;
+		//this.phone = phone;
 		this.roles = roles;
 		this.constituency=constituency;
 	}
@@ -113,13 +113,13 @@ public User(int id,String name, String password, String email, int phone, List<R
 		this.email = email;
 	}
 
-	public int getPhone() {
-		return phone;
-	}
-
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
+//	public int getPhone() {
+//		return phone;
+//	}
+//
+//	public void setPhone(int phone) {
+//		this.phone = phone;
+//	}
 
 	public List<Role> getRoles() {
 		return roles;
@@ -131,7 +131,7 @@ public User(int id,String name, String password, String email, int phone, List<R
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", phone=" + phone
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email 
 				+ ", roles=" + roles + "]";
 	}
 

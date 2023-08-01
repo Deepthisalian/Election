@@ -12,7 +12,8 @@ public interface NewConstituencyRepo extends JpaRepository<NewConstituency, Inte
 	
 	NewConstituency findByName(String constituency);
 
-	//NewConstituency findByConstituencyName(String constituencyName);
+
+
 
 	 
 
