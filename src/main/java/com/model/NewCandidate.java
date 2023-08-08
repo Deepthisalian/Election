@@ -5,7 +5,7 @@ import javax.persistence.*;
 import com.repository.NewCandidateRepo;
 
 @Entity
-@Table(name = "new_candidate")
+@Table(name = "candidate")
 public class NewCandidate {
 
     
@@ -16,28 +16,32 @@ public class NewCandidate {
 		this.voteCount = voteCount;
 		this.id = id;
 	}
+	
+	
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+
+	    @Column(nullable = false)
+	    private String candidateName;
+
+	    @ManyToOne
+	    @JoinColumn(name = "constituency_id")
+	    private NewConstituency constituency;
+
+	    private int voteCount;
 
 
-	@Id
-    private String candidateName;
-
-    @ManyToOne
-    @JoinColumn(name = "constituency_id")
-    private NewConstituency constituency;
-    
-    //NewCandidateRepo newCandidateRepository;
-
-    private int voteCount;
-    
-    private Long id;
-    
+	    
     public NewCandidate() {
         // Default constructor with no arguments
+    	
     }
     
     public NewCandidate(String candidateName) {
     	this.candidateName = candidateName;
 	}
+    
     
     
 

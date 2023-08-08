@@ -79,7 +79,7 @@
 
                 <div class="col col-complementary">
                     <!-- 2nd Col start -->
-                    <form th:action="@{/addcandidate}" method="post">
+                    <form th:action="@{/checkstatus}" method="post">
                         <div th:if="${session.msg}">
                             <h3 th:text="${session.msg}" style="color:red"></h3>
                             <th:block th:text="${#session.removeAttribute('msg')}"></th:block>

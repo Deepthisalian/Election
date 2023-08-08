@@ -32,6 +32,7 @@ public class NewConstituencyController {
         this.newcandidateService = newcandidateService; // Initialize the newcandidateService
     }
 
+//=======================================================================================================================================
     // Handler method to show the form for adding a new constituency
     @GetMapping("/addnewconstituency")
     public String addConstituency(Model model) {
@@ -48,6 +49,8 @@ public class NewConstituencyController {
         constituencyService.addConstituency(newConstituency);
         return "redirect:/admin/"; // Redirect to the admin dashboard or another page
     }
+    
+ //=======================================================================================================================================
 
     @GetMapping("/addnewcandidate")
     public String addnewConstituency(Model model) {

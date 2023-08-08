@@ -28,25 +28,9 @@ public class NewCandidateService {
 	}
 
 	public List<NewCandidate> getAllCandidates() {
-//		List<NewCandidate> candidates = new ArrayList<>();
-//
-//        // Create some sample NewCandidate objects and add them to the list
-//        NewCandidate candidate1 = new NewCandidate("C1");
-//        NewCandidate candidate2 = new NewCandidate("C2");
-//        NewCandidate candidate3 = new NewCandidate("C3");
-//        NewCandidate candidate4 = new NewCandidate("C4");
-//
-//        candidates.add(candidate1);
-//        candidates.add(candidate2);
-//        candidates.add(candidate3);
-//        candidates.add(candidate4);
-//        
-//        System.out.println("Candidate//////////"+candidates);
-//
-//        return candidates;
+
 		return newcandidateRepository.findAll();
 	}
-	
 	
 	
 	public NewCandidate getCandidateByName(String candidateName) {
@@ -56,13 +40,6 @@ public class NewCandidateService {
 	public List<NewCandidate> getCandidatesByConstituency(Long constituencyId) {
 		return newcandidateRepository.findByConstituencyId(constituencyId);
 	}
-	
-	
 
-	
-
-//    public List<NewCandidate> getAllCandidates() {
-//        return newcandidateRepository.findAll();
-//    }
     
 }

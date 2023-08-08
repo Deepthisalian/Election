@@ -44,8 +44,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	
-	
+
 	@GetMapping("/signin")
 	public String signin(Model m)
 	{
@@ -53,8 +52,7 @@ public class HomeController {
 		return "signin";
 	}
 	
-	
-	
+
 	@GetMapping("/register")
 	public String register(Model m)
 	{
@@ -66,6 +64,7 @@ public class HomeController {
         m.addAttribute("newConstituency", new NewConstituency());
 		return "register";
 	}
+	
 
 	@PostMapping("/createuser")
 	public String createuser(@ModelAttribute User user,HttpSession session)

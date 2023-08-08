@@ -59,15 +59,11 @@ public class AdminController {
 	    }
 
 
-		
-		
-//=======================================================================================================================================	
 	    
 	@RequestMapping("")
 	public String dashboard(Model m,Principal p)
 	{
 		
-
 		List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
 		m.addAttribute("allCandidates", allCandidates);
 		m.addAttribute("title","Admin Home");
@@ -75,38 +71,37 @@ public class AdminController {
 		return "admin/dashboard";
 	}
 	
-//=======================================================================================================================================	
-
-			
-			@GetMapping("/displayresults")
-			public String displayResults(Model m) {
-				
-				
-			    List<NewConstituency> allConstituencies = constituencyService.getAllConstituencies();
-			    
-			    m.addAttribute("allConstituencies", allConstituencies);
-			    
-			    List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
-				m.addAttribute("allCandidates", allCandidates);
-				
-				//List<NewConstituency> allConstituencies = newConstituencyService.getAllConstituencies();
-			    Map<Long, List<NewCandidate>> candidatesByConstituencies = new HashMap<>();
-
-			    for (NewConstituency constituency : allConstituencies) {
-			        List<NewCandidate> candidates = newcandidateService.getCandidatesByConstituency(constituency.getId());
-			        candidatesByConstituencies.put(constituency.getId(), candidates);
-			    }
-
-			    m.addAttribute("allConstituencies", allConstituencies);
-			    m.addAttribute("candidatesByConstituencies", candidatesByConstituencies);
-		        
-		        System.out.println("candidatesByConstituencies---------"+ candidatesByConstituencies);
-				
-				
-			    return "admin/displayresults";
-			}}
 
 
-//=======================================================================================================================================	
+	@GetMapping("/displayresults")
+	public String displayResults(Model m) {
+		
+		
+	    List<NewConstituency> allConstituencies = constituencyService.getAllConstituencies();
+	    
+	    m.addAttribute("allConstituencies", allConstituencies);
+	    
+	    List<NewCandidate> allCandidates = newcandidateService.getAllCandidates();
+		m.addAttribute("allCandidates", allCandidates);
+		
+		//List<NewConstituency> allConstituencies = newConstituencyService.getAllConstituencies();
+	    Map<Long, List<NewCandidate>> candidatesByConstituencies = new HashMap<>();
+
+	    for (NewConstituency constituency : allConstituencies) {
+	        List<NewCandidate> candidates = newcandidateService.getCandidatesByConstituency(constituency.getId());
+	        candidatesByConstituencies.put(constituency.getId(), candidates);
+	    }
+
+	    m.addAttribute("allConstituencies", allConstituencies);
+	    m.addAttribute("candidatesByConstituencies", candidatesByConstituencies);
+        
+        System.out.println("candidatesByConstituencies---------"+ candidatesByConstituencies);
+		
+		
+	    return "admin/displayresults";
+	}}
+
+
+
 
 

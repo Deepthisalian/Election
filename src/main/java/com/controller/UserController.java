@@ -3,6 +3,8 @@ package com.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model.NewCandidate;
 import com.model.NewConstituency;
@@ -40,23 +43,17 @@ public class UserController {
 		List<NewCandidate> allCandidates = newCandidateService.getAllCandidates();
     	m.addAttribute("allCandidates", allCandidates);
 		
-		
-
-
-    	
 		String userName = p.getName(); // it will give the username(email) of person who is login		
 
 		User user = userServ.getUserByEmail(userName);
 		
         String constituencyName = user.getConstituency();
         Long constituencyId = constituencyService.getConstituencyIdByName(constituencyName);
-        System.out.println("constituencyId ---------------"+ constituencyId );
-        //Add the constituencyId to the model
+        
         m.addAttribute("constituencyId", constituencyId);
 
         List<NewCandidate> candidatesByConstituency = newCandidateService.getCandidatesByConstituency(constituencyId);
-        System.out.println("candidatesByConstituency---------"+candidatesByConstituency);
-        // Add the list of candidates to the model
+        
         m.addAttribute("candidatesByConstituency", candidatesByConstituency);
 
 		
@@ -79,6 +76,8 @@ public class UserController {
 		return "user/dashboard";
 	}
 	
+//=======================================================================================================================================
+	
 	@GetMapping("/register")
     public String addConstituency(Model model) {
     	
@@ -94,5 +93,7 @@ public class UserController {
         constituencyService.addConstituency(newConstituency);
         return "user/dashboard"; // Redirect to the admin dashboard or another page
     }
+    
+
 
 }

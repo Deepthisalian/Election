@@ -39,7 +39,8 @@ public class NewCandidateController {
     public NewCandidateController(NewCandidateService newCandidateService) {
         this.newCandidateService = newCandidateService;
     }
-	@PostMapping("/addcandidate")
+    
+    @PostMapping("/checkstatus")
 	public String addCandidate(@RequestParam("candidate") String candidate, 
 			Principal p,Model model, HttpSession session)
 	{
@@ -55,7 +56,6 @@ public class NewCandidateController {
 			else {
 				
 				user.setHasVoted(true);
-		        //userService.saveUser(user);
 	            NewCandidate selectedCandidate = newCandidateService.getCandidateByName(candidate);
 
 	            if (selectedCandidate != null) {
@@ -74,12 +74,6 @@ public class NewCandidateController {
 		
 		return "redirect:user/";
 	}
-	
-
-	
-	
-	
-	
 
 }
 

@@ -36,10 +36,6 @@ public class AdminService {
 		return adm.get();
 	}
 	
-	public void deleteAdmin(int id)
-	{
-		admrepo.deleteById(id);
-	}
 	
 	public Admin getAdminByName(String name)
 	{

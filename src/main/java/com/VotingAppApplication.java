@@ -46,6 +46,7 @@ public class VotingAppApplication implements CommandLineRunner{
 		
 		List<Role> r = new ArrayList<>();
 		r.add(roleserv.getRoleByName("ROLE_ADMIN"));
+		
 	
 		a1.setRoles(r);
 		admserv.addAdmin(a1);

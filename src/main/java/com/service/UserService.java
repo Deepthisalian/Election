@@ -45,10 +45,6 @@ public class UserService {
 		return null;
 	}
 
-	public void deleteUser(int id)
-	{
-		userrepo.deleteById(id);
-	}
 	
 	public User getUserByEmail(String email)
 	{
