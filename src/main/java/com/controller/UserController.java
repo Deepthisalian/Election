@@ -60,6 +60,7 @@ public class UserController {
 		String status = "Not Voted";
 		if (user.isHasVoted()== true) {
 			
+			
 			status = "Voted";
 		}
 		
